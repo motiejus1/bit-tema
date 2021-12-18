@@ -10,7 +10,10 @@
 //uz stiliaus prijungima tiek uz skripto pajungima
 function bit_tema_enqueue() {
     wp_enqueue_style( 'bit-tema-style', get_template_directory_uri() . "/assets/css/style.css" );
-    wp_enqueue_script('bit-tema-script', get_template_directory_uri() . "/assets/js/script.js" );
+    wp_enqueue_style( 'bit-tema-style-nicepage', get_template_directory_uri() . "/assets/css/nicepage.css" );
+    wp_enqueue_style( 'bit-tema-style', get_template_directory_uri() . "/assets/css/Post-Template.css" );
+    wp_enqueue_script('bit-tema-script', get_template_directory_uri() . "/assets/js/jquery.js" );
+    wp_enqueue_script('bit-tema-script', get_template_directory_uri() . "/assets/js/nicepage.js" );
     wp_add_inline_style( 'bit-tema-style', bit_tema_generate_css() );
 }
 

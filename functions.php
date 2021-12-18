@@ -23,7 +23,7 @@ function bit_tema_customizer_section($wp_customize) {
 
     $wp_customize->add_setting('test',array(
         'default'=> '',
-        'sanitize_callback' => true
+        'sanitize_callback' => ''
     ));
 
     $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'test', array(

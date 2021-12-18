@@ -22,18 +22,19 @@ function bit_tema_customizer_section($wp_customize) {
     ));
 
     $wp_customize->add_setting('test',array(
-        'default'=> true,
+        'default'=> '',
         'sanitize_callback' => true
     ));
-    
+
     $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'test', array(
         'label' => 'test',
         'description' => 'test',
         'section' => 'bit_tema_settings',
         'type' => 'text',
         'priority'=> 10
-    ))
-    );
+    )));
+
+   
 }
 
 add_action("customize_register", 'bit_tema_customizer_section' );

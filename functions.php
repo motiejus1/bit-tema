@@ -21,20 +21,32 @@ function bit_tema_customizer_section($wp_customize) {
         'priority' => 101
     ));
 
-    $wp_customize->add_setting('test',array(
+    $wp_customize->add_setting('bit_tema_copyright',array(
         'default'=> '',
         'sanitize_callback' => ''
     ));
 
-    $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'test', array(
-        'label' => 'test',
-        'description' => 'test',
+    $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'bit_tema_copyright', array(
+        'label' => 'Copyright text',
+        'description' => 'Enter copyright text here',
         'section' => 'bit_tema_settings',
         'type' => 'text',
         'priority'=> 10
     )));
 
-   
+    $wp_customize->add_setting('bit_tema_show_menu', array(
+        'default' => true,
+        'sanitize_callback' => ''
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Control($wp_customize, 'bit_tema_show_menu', array(
+        'label' => 'Show menu',
+        'description' => 'Menu visibility settings',
+        'section' => 'bit_tema_settings',
+        'type' => 'checkbox',
+        'priority'=> 10
+    )));
+
 }
 
 add_action("customize_register", 'bit_tema_customizer_section' );

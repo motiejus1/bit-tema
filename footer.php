@@ -5,7 +5,7 @@
     //nepazymetas = false
 ?>
 
-<footer>
+<footer class="footer">
     <?php wp_footer(); ?>
 
     <?php if($show_menu): ?>
@@ -15,7 +15,7 @@
             ));
         ?>
     <?php endif; ?>
-      
+
     <?php if($copyright): ?> 
         <p class="copyright-text"><?php echo $copyright; ?></p>
     <?php endif; ?>    

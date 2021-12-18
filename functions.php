@@ -3,13 +3,15 @@
 
 //1. Prijungti stiliu x 
 //2. Prijungti Javascript dokumenteli x
-//3. Customizeryje susikurti savo nustatyma: Copyright text
+//3. Customizeryje susikurti savo nustatyma: Copyright text x
+//4. Sukurti nustatyma kuris p tago spalva padaro tokia kokia mes norime
 
 
 //uz stiliaus prijungima tiek uz skripto pajungima
 function bit_tema_enqueue() {
     wp_enqueue_style( 'bit-tema-style', get_template_directory_uri() . "/assets/css/style.css" );
     wp_enqueue_script('bit-tema-script', get_template_directory_uri() . "/assets/js/script.js" );
+    wp_add_inline_style( 'bit-tema-style', bit_tema_generate_css() );
 }
 
 add_action("wp_enqueue_scripts", "bit_tema_enqueue");
@@ -21,6 +23,8 @@ function bit_tema_customizer_section($wp_customize) {
         'priority' => 101
     ));
 
+
+    // Copyright
     $wp_customize->add_setting('bit_tema_copyright',array(
         'default'=> '',
         'sanitize_callback' => ''
@@ -34,6 +38,7 @@ function bit_tema_customizer_section($wp_customize) {
         'priority'=> 10
     )));
 
+    //Show menu
     $wp_customize->add_setting('bit_tema_show_menu', array(
         'default' => true,
         'sanitize_callback' => ''
@@ -47,10 +52,46 @@ function bit_tema_customizer_section($wp_customize) {
         'priority'=> 10
     )));
 
+    //P tag color select
+    $wp_customize->add_setting('bit_tema_color_select', array(
+        'default' => '#000000',
+        'sanitize_callback' => ''
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'bit_tema_color_select', array(
+        'label' => 'P tag color',
+        'description' => 'Choose footer P tag color',
+        'section' => 'bit_tema_settings',
+        'priority'=> 10
+    )));
+
+    // Footer background color
+    $wp_customize->add_setting('bit_tema_footer_background', array(
+        'default' => '#ffffff',
+        'sanitize_callback' => ''
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Color_Control($wp_customize, 'bit_tema_footer_background', array(
+        'label' => 'Footer background',
+        'description' => 'Choose footer background color',
+        'section' => 'bit_tema_settings',
+        'priority'=> 10
+    )));
+
 }
 
 add_action("customize_register", 'bit_tema_customizer_section' );
 
+function bit_tema_generate_css() {
+    $css = '';
+    $color = get_theme_mod('bit_tema_color_select');
+    $background_color = get_theme_mod('bit_tema_footer_background');
+
+    $css .= ".footer p { color:".$color." }";
+    $css .= ".footer {background-color:".$background_color."}";
+    return $css;
+
+}
 
 
 function atvaizduok() {
